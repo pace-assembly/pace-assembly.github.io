@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PACE learns proprioception-anchored visual and force representations for zero-shot sim-to-real contact-rich robotic assembly.">
+  <meta name="keywords" content="PACE, contact-rich assembly, sim-to-real, multimodal learning, robot learning, reinforcement learning">
+  <meta name="author" content="Yuhan Wang, Yurou Chen, Hongye Jiang, Gaojing Zhang, Wenzhao Lian">
+  <meta name="theme-color" content="#102544">
+  <meta name="citation_title" content="Proprioception-Anchored Cross-Modal Pretraining for Zero-Shot Sim-to-Real Contact-Rich Assembly">
+  <meta name="citation_author" content="Yuhan Wang">
+  <meta name="citation_author" content="Yurou Chen">
+  <meta name="citation_author" content="Hongye Jiang">
+  <meta name="citation_author" content="Gaojing Zhang">
+  <meta name="citation_author" content="Wenzhao Lian">
+  <meta name="citation_publication_date" content="2026/09/07">
+  <meta name="citation_doi" content="10.48550/arXiv.2609.07534">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2609.07534">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="PACE | Proprioception-Anchored Cross-Modal Pretraining">
+  <meta property="og:description" content="Zero-shot sim-to-real contact-rich assembly with 93.3% average real-world success across four tasks.">
+  <meta property="og:image" content="./static/images/teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>PACE | Proprioception-Anchored Cross-Modal Pretraining</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "Proprioception-Anchored Cross-Modal Pretraining for Zero-Shot Sim-to-Real Contact-Rich Assembly",
+      "author": [
+        {"@type": "Person", "name": "Yuhan Wang"},
+        {"@type": "Person", "name": "Yurou Chen"},
+        {"@type": "Person", "name": "Hongye Jiang"},
+        {"@type": "Person", "name": "Gaojing Zhang"},
+        {"@type": "Person", "name": "Wenzhao Lian"}
+      ],
+      "datePublished": "2026-09-07",
+      "dateModified": "2026-09-14",
+      "identifier": "arXiv:2609.07534",
+      "sameAs": "https://doi.org/10.48550/arXiv.2609.07534",
+      "url": "https://arxiv.org/abs/2609.07534"
+    }
+  </script>
+</head>
+<body>
+
+<nav class="navbar project-navbar" role="navigation" aria-label="Project navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item project-mark" href="#top" aria-label="PACE home">
+        <span class="mark-symbol" aria-hidden="true">P</span>
+        <span>PACE</span>
+      </a>
+      <button class="navbar-burger" type="button" aria-label="Open navigation" aria-expanded="false" data-target="project-menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    <div id="project-menu" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#overview">Overview</a>
+        <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#tasks">Tasks</a>
+        <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#citation">Citation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero project-hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-11 has-text-centered">
+            <p class="eyebrow"><span class="publication-status-dot" aria-hidden="true"></span>arXiv · September 2026</p>
+            <h1 class="title publication-title">
+              Proprioception-Anchored Cross-Modal Pretraining
+              <span class="title-accent">for Zero-Shot Sim-to-Real Contact-Rich Assembly</span>
+            </h1>
+            <p class="pace-expansion">
+              <strong>PACE</strong> · <strong>P</strong>roprioception-<strong>A</strong>nchored
+              <strong>C</strong>ross-modal <strong>E</strong>ncoder
+            </p>
+
+            <div class="publication-authors" aria-label="Paper authors">
+              <span>Yuhan Wang<sup>1</sup></span>
+              <span>Yurou Chen<sup>2</sup></span>
+              <span>Hongye Jiang<sup>1</sup></span>
+              <span>Gaojing Zhang<sup>3</sup></span>
+              <span>Wenzhao Lian<sup>1,*</sup></span>
+            </div>
+            <div class="publication-affiliations">
+              <span><sup>1</sup> Shanghai Jiao Tong University</span>
+              <span><sup>2</sup> CoreNetic.ai</span>
+              <span><sup>3</sup> University of Sussex</span>
+              <span><sup>*</sup> Corresponding author</span>
+            </div>
+
+            <div class="publication-links" aria-label="Project resources">
+              <a class="button is-rounded resource-button resource-button-primary" href="https://arxiv.org/pdf/2609.07534" target="_blank" rel="noopener noreferrer">
+                <span class="icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span>
+                <span>PDF</span>
+              </a>
+              <a class="button is-rounded resource-button" href="https://arxiv.org/abs/2609.07534" target="_blank" rel="noopener noreferrer">
+                <span class="icon"><i class="fas fa-file-alt" aria-hidden="true"></i></span>
+                <span>arXiv:2609.07534</span>
+              </a>
+              <span class="button is-rounded resource-button is-disabled" aria-disabled="true" title="Code release coming soon">
+                <span class="icon"><i class="fab fa-github" aria-hidden="true"></i></span>
+                <span>Code · Soon</span>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section teaser-section" id="overview">
+    <div class="container is-max-desktop">
+      <div class="figure-shell teaser-figure media-shell">
+        <video class="autoplay-on-view" muted loop playsinline preload="metadata"
+               poster="./static/images/teaser.png"
+               aria-label="Animated overview of the PACE training and deployment pipeline">
+          <source src="./static/videos/teaser.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+      <p class="figure-caption lead-caption">
+        PACE learns visual and force representations from simulated demonstrations, freezes the
+        encoder during asymmetric RL, and transfers the resulting policy directly to hardware.
+      </p>
+    </div>
+  </section>
+
+  <section class="section abstract-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <div class="section-heading has-text-centered">
+            <p class="section-kicker">Why PACE?</p>
+            <h2 class="title is-2">Anchor changing observations to robot motion</h2>
+          </div>
+          <div class="content abstract-copy">
+            <p>
+              Contact-rich assembly requires submillimeter spatial accuracy and reliable
+              interpretation of small forces during sustained contact. Simulation provides scalable
+              training, but visual appearance and force/torque measurements differ systematically
+              between simulation and hardware.
+            </p>
+            <p>
+              PACE uses a comparatively consistent signal—joint proprioception—to supervise temporal
+              visual and F/T representations. By predicting proprioceptive state transitions, the
+              encoder is encouraged to suppress static domain-specific factors while retaining
+              task-relevant motion cues. Policies trained on the frozen representation deploy on
+              hardware without real-world fine-tuning or object-pose tracking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section method-section" id="method">
+    <div class="container is-max-desktop">
+      <div class="section-heading has-text-centered">
+        <p class="section-kicker">Method</p>
+        <h2 class="title is-2">Proprioception-anchored pretraining</h2>
+        <p class="section-summary">
+          Two modality-specific pathways extract motion codes and learn task-relevant,
+          complementary representations before policy training begins.
+        </p>
+      </div>
+
+      <div class="data-collection-card">
+        <div class="data-collection-media">
+          <video class="autoplay-on-view" muted loop playsinline preload="metadata"
+                 aria-label="Parallel expert demonstration collection in simulation">
+            <source src="./static/videos/data_collection.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="data-collection-copy">
+          <p class="section-kicker">Simulation-only data</p>
+          <h3>Privileged experts collect multimodal demonstrations at scale</h3>
+          <p>For each task, parallel simulation rollouts record dual-camera RGB, wrist F/T, proprioception, actions, and engagement labels for encoder pretraining.</p>
+        </div>
+      </div>
+
+      <figure class="figure-shell architecture-figure">
+        <img src="./static/images/arch.png" alt="PACE encoder architecture with visual and force temporal pathways anchored by forward and backward proprioceptive prediction">
+      </figure>
+
+      <div class="mechanism-grid">
+        <article class="mechanism-card visual-card">
+          <span class="mechanism-index">01</span>
+          <h3>Zero-sum temporal kernels</h3>
+          <p>Separate learnable kernels extract visual and force motion codes while suppressing constant appearance and sensor offsets.</p>
+        </article>
+        <article class="mechanism-card anchor-card">
+          <span class="mechanism-index">02</span>
+          <h3>Proprioceptive anchoring</h3>
+          <p>Forward prediction and backward cycle consistency tie multimodal motion codes to proprioceptive state transitions.</p>
+        </article>
+        <article class="mechanism-card force-card">
+          <span class="mechanism-index">03</span>
+          <h3>Complementary supervision</h3>
+          <p>Spatial alignment, contact engagement, and masked reconstruction preserve task information across both streams.</p>
+        </article>
+        <article class="mechanism-card policy-card">
+          <span class="mechanism-index">04</span>
+          <h3>Frozen-feature RL</h3>
+          <p>An asymmetric actor–critic learns on frozen PACE features, with conventional domain randomization covering physical variation.</p>
+        </article>
+      </div>
+
+      <div class="workflow-strip" aria-label="PACE workflow">
+        <div class="workflow-step"><span>1</span><strong>Collect</strong><small>Privileged expert demonstrations</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>2</span><strong>Pretrain</strong><small>Visual, F/T, and proprioceptive signals</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>3</span><strong>Learn</strong><small>Asymmetric RL on frozen features</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>4</span><strong>Deploy</strong><small>No real-world parameter updates</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tasks-section" id="tasks">
+    <div class="container is-max-desktop">
+      <div class="section-heading has-text-centered">
+        <p class="section-kicker">Evaluation</p>
+        <h2 class="title is-2">Four contact-rich assembly tasks</h2>
+        <p class="section-summary">
+          The benchmark spans fine visual alignment, meshing, rotational mismatch, and
+          force-sensitive engagement with sloped geometry.
+        </p>
+      </div>
+
+      <div class="task-video-grid">
+        <article class="task-video-card">
+          <div class="task-video-frame">
+            <video class="autoplay-on-view" muted loop playsinline preload="metadata" aria-label="PACE completing PegInsert on the real robot">
+              <source src="./static/videos/peginsert.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="task-video-copy">
+            <div class="task-title-row"><div><span class="task-source">Factory</span><h3>PegInsert</h3></div><strong>96.7%</strong></div>
+            <p>A 16-mm peg with approximately 0.1-mm radial clearance, emphasizing fine visual alignment.</p>
+          </div>
+        </article>
+        <article class="task-video-card">
+          <div class="task-video-frame">
+            <video class="autoplay-on-view" muted loop playsinline preload="metadata" aria-label="PACE completing GearMesh on the real robot">
+              <source src="./static/videos/gearmesh.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="task-video-copy">
+            <div class="task-title-row"><div><span class="task-source">Factory</span><h3>GearMesh</h3></div><strong>93.3%</strong></div>
+            <p>A 30-mm gear meshed with adjacent fixed gears, requiring contact-sensitive translational alignment.</p>
+          </div>
+        </article>
+        <article class="task-video-card">
+          <div class="task-video-frame">
+            <video class="autoplay-on-view" muted loop playsinline preload="metadata" aria-label="PACE completing JointAssemble on the real robot">
+              <source src="./static/videos/jointassemble.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="task-video-copy">
+            <div class="task-title-row"><div><span class="task-source">AutoMate</span><h3>JointAssemble</h3></div><strong>90.0%</strong></div>
+            <p>A square plug requiring both planar and yaw alignment throughout insertion.</p>
+          </div>
+        </article>
+        <article class="task-video-card">
+          <div class="task-video-frame">
+            <video class="autoplay-on-view" muted loop playsinline preload="metadata" aria-label="PACE completing KnobTighten on the real robot">
+              <source src="./static/videos/knobtighten.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="task-video-copy">
+            <div class="task-title-row"><div><span class="task-source">AutoMate</span><h3>KnobTighten</h3></div><strong>93.3%</strong></div>
+            <p>A knob and sloped socket whose contact geometry increases reliance on F/T feedback.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section results-section" id="results">
+    <div class="container is-max-desktop">
+      <div class="section-heading has-text-centered">
+        <p class="section-kicker">Results</p>
+        <h2 class="title is-2">Transfer with less degradation</h2>
+        <p class="section-summary">
+          PACE retains high success after zero-shot transfer while pose-based and learned-fusion
+          baselines show substantially larger sim-to-real decreases.
+        </p>
+      </div>
+
+      <div class="result-table-shell">
+        <table class="table result-table is-fullwidth" aria-label="Average zero-shot sim-to-real results">
+          <thead>
+            <tr><th>Method</th><th>Average real success ↑</th><th>Sim-to-real decrease ↓</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pose-Based PPO</td><td>77.5%</td><td>18.9 pp</td></tr>
+            <tr><td>AugInsert</td><td>68.3%</td><td>18.4 pp</td></tr>
+            <tr><td>No-Pretrain RL</td><td>7.5%</td><td>43.7 pp</td></tr>
+            <tr class="pace-result-row"><td><strong>PACE</strong></td><td><strong>93.3%</strong></td><td><strong>2.7 pp</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="result-figures">
+        <article class="result-panel">
+          <div class="panel-copy">
+            <p class="section-kicker">Representation analysis</p>
+            <h3>Stronger cross-domain feature alignment</h3>
+            <p>Along matched simulation and hardware trajectories, PACE representations remain more closely aligned than unadapted DINOv2 and raw F/T features, particularly during contact.</p>
+            <div class="compact-stat-row">
+              <span><strong>0.91</strong> PACE visual</span>
+              <span><strong>0.64</strong> PACE force</span>
+            </div>
+          </div>
+          <figure class="figure-shell">
+            <img src="./static/images/domaingap.png" alt="Cosine similarity of simulation and real features along a matched trajectory">
+          </figure>
+        </article>
+
+        <article class="result-panel reverse-panel">
+          <div class="panel-copy">
+            <p class="section-kicker">Stress tests</p>
+            <h3>Robust under visual and sensor perturbations</h3>
+            <p>On GearMesh, PACE maintains 90–100% success under lighting changes, a 2-cm camera shift, a 2-N F/T bias, and a changed background.</p>
+            <div class="compact-stat-row">
+              <span><strong>90%</strong> camera shift</span>
+              <span><strong>90%</strong> F/T bias</span>
+            </div>
+          </div>
+          <div class="figure-shell media-shell">
+            <video class="autoplay-on-view" muted loop playsinline preload="metadata"
+                   poster="./static/images/robustness.png"
+                   aria-label="PACE and baseline performance under visual and force perturbations">
+              <source src="./static/videos/robustness.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+      </div>
+
+      <div class="finding-grid">
+        <article>
+          <span class="finding-number">25.5 pp</span>
+          <h3>Without proprioceptive anchoring</h3>
+          <p>The average transfer decrease rises from 2.7 to 25.5 percentage points.</p>
+        </article>
+        <article>
+          <span class="finding-number">−11.3 pp</span>
+          <h3>Without the force stream</h3>
+          <p>Average simulated success shows its largest stream-level decrease.</p>
+        </article>
+        <article>
+          <span class="finding-number">90–100%</span>
+          <h3>Across perturbations</h3>
+          <p>Masked reconstruction and proprioceptive anchoring support robust deployment.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section citation-section" id="citation">
+    <div class="container is-max-desktop">
+      <div class="citation-card">
+        <div class="citation-heading">
+          <div>
+            <p class="section-kicker">Citation</p>
+            <h2>BibTeX</h2>
+          </div>
+          <button class="button is-rounded citation-copy-button" id="copy-citation" type="button">
+            <span class="icon"><i class="fas fa-copy" aria-hidden="true"></i></span>
+            <span class="copy-label">Copy BibTeX</span>
+          </button>
+        </div>
+        <pre><code id="bibtex-entry">@misc{wang2026pace,
+  title         = {Proprioception-Anchored Cross-Modal Pretraining for Zero-Shot Sim-to-Real Contact-Rich Assembly},
+  author        = {Wang, Yuhan and Chen, Yurou and Jiang, Hongye and Zhang, Gaojing and Lian, Wenzhao},
+  year          = {2026},
+  eprint        = {2609.07534},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  doi           = {10.48550/arXiv.2609.07534},
+  url           = {https://arxiv.org/abs/2609.07534}
+}</code></pre>
+        <p class="visually-hidden" id="copy-status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer project-footer">
+  <div class="container is-max-desktop">
+    <div class="footer-row">
+      <p><strong>PACE</strong> · <a href="https://arxiv.org/abs/2609.07534" target="_blank" rel="noopener noreferrer">arXiv:2609.07534</a></p>
+      <p>Website template adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
