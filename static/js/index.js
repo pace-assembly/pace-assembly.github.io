@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          if (entry.target.dataset.playOnce !== undefined && entry.target.ended) {
+            videoObserver.unobserve(entry.target);
+            return;
+          }
           entry.target.play().catch(() => {});
         } else {
           entry.target.pause();
@@ -33,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.35 });
 
     ambientVideos.forEach((video) => {
+      if (video.dataset.playOnce !== undefined) {
+        video.addEventListener('ended', () => videoObserver.unobserve(video), { once: true });
+      }
       videoObserver.observe(video);
     });
   }

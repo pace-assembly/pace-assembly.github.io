@@ -601,6 +601,10 @@ a.resource-button-primary:hover {
   grid-template-columns: minmax(0, 1.26fr) minmax(0, 0.74fr);
 }
 
+.robustness-panel {
+  grid-template-columns: minmax(0, 1.4fr) minmax(17rem, 0.6fr);
+}
+
 .reverse-panel .panel-copy {
   grid-column: 2;
   grid-row: 1;
